@@ -6,30 +6,33 @@ const analyzeRoute = express.Router();
 analyzeRoute.post("/", async (req, res) => {
   const { sentence } = req.body;
 
+  if (!sentence) {
+    return res.status(400).json({
+      success: false,
+      error: "Sentence is required",
+    });
+  }
+
   try {
     const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
+      "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "gpt-5-mini",
+        model: "llama-3.1-8b-instant",
         messages: [
           {
             role: "system",
-            content:
-              "You are a helpful assistant that corrects grammar and spelling. If the sentence is correct, return it as it is.",
+            content: "You are a professional English rewriter.Rephrase the given sentence into a more natural, friendly, and fluent version.Do NOT explain.Return ONLY the improved sentence.",
           },
           {
             role: "user",
             content: sentence,
           },
         ],
-        max_tokens: 100,
-        n : 2,
-        stop: null,
-        temperature: 0.7,
+        temperature: 0.3,
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
           "Content-Type": "application/json",
         },
       }
@@ -37,15 +40,16 @@ analyzeRoute.post("/", async (req, res) => {
 
     res.json({
       success: true,
-      result: response.data,
+      result: response.data.choices[0].message.content,
+      provider: "groq",
     });
   } catch (error) {
+    console.error("GROQ ERROR:", error.response?.data || error.message);
     res.status(500).json({
       success: false,
-      error: error.message,
+      error: error.response?.data || error.message,
     });
   }
 });
 
-// export route
 module.exports = analyzeRoute;
