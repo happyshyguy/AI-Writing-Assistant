@@ -20,5 +20,5 @@ function App() {
     </BrowserRouter>
   )
 }
-// temp text fro git commit 
+// temp text fro git commit 31 dec
 export default App;
