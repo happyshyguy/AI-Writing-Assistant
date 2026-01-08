@@ -1,3 +1,4 @@
+/* Root Layout */
 #root {
   min-height: 100vh;
   display: flex;
@@ -9,48 +10,62 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Component Utilities */
+.card {
+  background-color: var(--bg-inverse);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
 }
 
-::-webkit-scrollbar-track {
-  background: #1e293b;
+.card:hover {
+  border-color: var(--text-tertiary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #475569;
-  border-radius: 4px;
+.card-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+.badge {
+  display: inline-block;
+  padding: 0.375rem 0.875rem;
+  border-radius: 6px;
+  font-size: 0.875em;
+  font-weight: 500;
 }
 
-/* Animations */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.badge-primary {
+  background-color: var(--accent-light);
+  color: var(--accent-primary);
 }
 
-/* Loading spinner */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.badge-success {
+  background-color: #ecfdf5;
+  color: var(--success);
 }
 
-.animate-spin {
-  animation: spin 1s linear infinite;
+.badge-error {
+  background-color: #fef2f2;
+  color: var(--error);
+}
+
+/* Text Utilities */
+.text-muted {
+  color: var(--text-secondary);
+}
+
+.text-subtle {
+  color: var(--text-tertiary);
+}
+
+/* Responsive Grid */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 

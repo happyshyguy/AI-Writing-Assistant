@@ -68,30 +68,30 @@ const Editor = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-12 px-4">
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-3 text-gray-900">
             ✍️ Writing Assistant
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-600 text-lg">
             Improve your text with AI-powered corrections and refinements
           </p>
         </div>
 
         {/* Tool Selection Tabs */}
-        <div className="bg-slate-800 rounded-t-lg border border-slate-700 p-4 flex gap-2 mb-0 overflow-x-auto">
+        <div className="bg-white rounded-t-lg border border-gray-200 p-4 flex gap-2 mb-0 overflow-x-auto">
           <button
             onClick={() => {
               setActiveTab('spell')
               setOutputText('')
               setError('')
             }}
-            className={`px-6 py-2 rounded font-semibold transition whitespace-nowrap ${
+            className={`px-6 py-2.5 rounded-lg font-semibold transition whitespace-nowrap text-sm ${
               activeTab === 'spell'
-                ? 'bg-green-500 text-white'
-                : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+                ? 'bg-indigo-600 text-white'
+                : 'text-gray-600 hover:text-gray-900 border border-gray-200'
             }`}
           >
             🔍 Spell Check
@@ -102,10 +102,10 @@ const Editor = () => {
               setOutputText('')
               setError('')
             }}
-            className={`px-6 py-2 rounded font-semibold transition whitespace-nowrap ${
+            className={`px-6 py-2.5 rounded-lg font-semibold transition whitespace-nowrap text-sm ${
               activeTab === 'grammar'
-                ? 'bg-blue-500 text-white'
-                : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+                ? 'bg-indigo-600 text-white'
+                : 'text-gray-600 hover:text-gray-900 border border-gray-200'
             }`}
           >
             📚 Grammar Check
@@ -116,10 +116,10 @@ const Editor = () => {
               setOutputText('')
               setError('')
             }}
-            className={`px-6 py-2 rounded font-semibold transition whitespace-nowrap ${
+            className={`px-6 py-2.5 rounded-lg font-semibold transition whitespace-nowrap text-sm ${
               activeTab === 'analyze'
-                ? 'bg-purple-500 text-white'
-                : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+                ? 'bg-indigo-600 text-white'
+                : 'text-gray-600 hover:text-gray-900 border border-gray-200'
             }`}
           >
             ✨ Rephrase
@@ -127,18 +127,18 @@ const Editor = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="bg-slate-800 border border-t-0 border-slate-700 rounded-b-lg p-6 md:p-8">
+        <div className="bg-white border border-t-0 border-gray-200 rounded-b-lg p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Input Section */}
             <div>
-              <label className="block text-sm font-semibold mb-3 text-gray-200">
+              <label className="block text-sm font-semibold mb-3 text-gray-900">
                 📝 Your Text
               </label>
               <textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="Paste or type your text here..."
-                className="w-full h-80 p-4 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 resize-none"
+                className="w-full h-80 p-4 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 resize-none"
               />
               <div className="mt-4 flex gap-2 flex-wrap">
                 <button
@@ -148,7 +148,7 @@ const Editor = () => {
                     'analyze'
                   )}
                   disabled={loading || !inputText.trim()}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed px-6 py-2 rounded-lg font-semibold transition"
+                  className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg font-black transition shadow-md"
                 >
                   {loading ? (
                     <>
@@ -167,7 +167,7 @@ const Editor = () => {
                 <button
                   onClick={clearAll}
                   disabled={!inputText && !outputText}
-                  className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 disabled:bg-gray-700 disabled:cursor-not-allowed px-6 py-2 rounded-lg font-semibold transition"
+                  className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-100 disabled:cursor-not-allowed text-gray-900 px-6 py-2 rounded-lg font-semibold transition border border-gray-300"
                 >
                   <FiRefreshCw />
                   Clear
@@ -177,23 +177,23 @@ const Editor = () => {
 
             {/* Output Section */}
             <div>
-              <label className="block text-sm font-semibold mb-3 text-gray-200">
+              <label className="block text-sm font-semibold mb-3 text-gray-900">
                 ✨ Result
               </label>
               <textarea
                 value={outputText}
                 readOnly
                 placeholder="Your corrected text will appear here..."
-                className="w-full h-80 p-4 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-500 focus:outline-none resize-none"
+                className="w-full h-80 p-4 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none resize-none"
               />
               <div className="mt-4 flex gap-2 flex-wrap">
                 <button
                   onClick={copyToClipboard}
                   disabled={!outputText}
-                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-semibold transition relative ${
+                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-black transition shadow-md ${
                     outputText
-                      ? 'bg-cyan-600 hover:bg-cyan-700 cursor-pointer'
-                      : 'bg-gray-600 cursor-not-allowed'
+                      ? 'bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                   title="Copy to clipboard"
                 >
@@ -203,10 +203,10 @@ const Editor = () => {
                 <button
                   onClick={useOutput}
                   disabled={!outputText}
-                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-semibold transition ${
+                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-black transition shadow-md ${
                     outputText
-                      ? 'bg-purple-600 hover:bg-purple-700 cursor-pointer'
-                      : 'bg-gray-600 cursor-not-allowed'
+                      ? 'bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                   title="Use this as input for further processing"
                 >
@@ -219,27 +219,27 @@ const Editor = () => {
 
           {/* Error Message */}
           {error && (
-            <div className="mt-6 p-4 bg-red-900 bg-opacity-50 border border-red-500 rounded-lg flex items-start gap-3">
-              <FiAlertCircle className="text-red-400 mt-1 flex-shrink-0" />
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+              <FiAlertCircle className="text-red-600 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-semibold text-red-400">Error</p>
-                <p className="text-red-200 text-sm mt-1">{error}</p>
+                <p className="font-semibold text-red-900">Error</p>
+                <p className="text-red-800 text-sm mt-1">{error}</p>
               </div>
             </div>
           )}
 
           {/* Success Message */}
           {success && (
-            <div className="mt-6 p-4 bg-green-900 bg-opacity-50 border border-green-500 rounded-lg flex items-start gap-3">
-              <FiCheck className="text-green-400 mt-1 flex-shrink-0" />
-              <p className="text-green-200">{success}</p>
+            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
+              <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
+              <p className="text-green-900">{success}</p>
             </div>
           )}
 
           {/* Instructions */}
-          <div className="mt-8 p-4 bg-slate-700 bg-opacity-50 rounded-lg border border-slate-600">
-            <h3 className="font-semibold text-gray-200 mb-2">How to use:</h3>
-            <ul className="text-gray-400 text-sm space-y-1">
+          <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <h3 className="font-semibold text-gray-900 mb-3">How to use:</h3>
+            <ul className="text-gray-600 text-sm space-y-2">
               <li>✓ Enter or paste your text in the left box</li>
               <li>✓ Select the correction type (Spell Check, Grammar Check, or Rephrase)</li>
               <li>✓ Click the button to process your text</li>
@@ -249,7 +249,7 @@ const Editor = () => {
         </div>
 
         {/* Server Status Info */}
-        <div className="mt-6 p-4 bg-slate-800 border border-slate-700 rounded-lg text-center text-gray-400 text-sm">
+        <div className="mt-6 p-4 bg-white border border-gray-200 rounded-lg text-center text-gray-500 text-sm">
           <p>Powered by GROQ API | Llama 3.1 Model | Server: {API_BASE_URL}</p>
         </div>
       </div>
